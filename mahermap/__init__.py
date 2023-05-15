@@ -3,3 +3,6 @@
 __author__ = """maher"""
 __email__ = 'mahergisanalyst@gmail.com'
 __version__ = '0.0.1'
+
+
+from mahermap.mahermap import *
