@@ -5,4 +5,4 @@ __email__ = 'mahergisanalyst@gmail.com'
 __version__ = '0.0.1'
 
 
-from mahermap.mahermap import *
+from .mahermap import *
