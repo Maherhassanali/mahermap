@@ -4,7 +4,7 @@ import string
 
 def generate_random_string(length=5):
     
-    """_summary_
+    """
     Generate a random string of length 
     **enter the length of the string to generate the random string**
 
