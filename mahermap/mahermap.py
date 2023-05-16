@@ -15,4 +15,10 @@ def generate_random_string(length=5):
     return ''.join(random.choice(letters) for i in range(length))
 
 def the_name(name):
+    """write the name
+
+    Args:
+        name (string): just write the name you want 
+        for testing
+    """    
     print(name)
