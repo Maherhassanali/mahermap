@@ -34,7 +34,8 @@ markdown_extensions:
           linenums: true
     - toc:
           permalink: true
-
+Examples:
+    -examples/intro.ipynb
 # extra:
 #     analytics:
 #         provider: google
