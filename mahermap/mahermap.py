@@ -1,6 +1,18 @@
 """Main module."""
 import random
 import string
+import ipyleaflet
+
+
+
+class Map(ipyleaflet.Map):
+
+
+    def __init__(self) -> None:
+        super.__init__()
+
+
+
 
 def generate_random_string(length=5):
     

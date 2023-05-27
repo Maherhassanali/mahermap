@@ -37,6 +37,8 @@ markdown_extensions:
 Examples:
     -examples/intro.ipynb
     -examples/folium.ipynb
+    -examples/ipyleaflet.ipynb
+    -examples/mahermap.ipynb
 # extra:
 #     analytics:
 #         provider: google
