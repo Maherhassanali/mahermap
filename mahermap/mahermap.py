@@ -9,7 +9,7 @@ class Map(ipyleaflet.Map):
 
 
     def __init__(self) -> None:
-        super.__init__()
+        super().__init__()
 
 
 
