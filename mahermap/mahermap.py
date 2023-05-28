@@ -8,8 +8,8 @@ import ipyleaflet
 class Map(ipyleaflet.Map):
 
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, center , zoom , ** kwargs) -> None:
+        super().__init__(center=center,zoom=zoom,** kwargs)
 
 
 
