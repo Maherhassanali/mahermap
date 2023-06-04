@@ -8,12 +8,22 @@ import ipyleaflet
 class Map(ipyleaflet.Map):
 
 
-    def __init__(self, center , zoom , ** kwargs) -> None:
+    def __init__(self, center=[25,32] , zoom=5 , ** kwargs) -> None:
         if "scroll_wheel_zoom" not in kwargs :
             kwargs["scroll_wheel_zoom"] =True
 
-            print(kwargs)
+            
         super().__init__(center=center,zoom=zoom,** kwargs)
+        if "layers_control" not in kwargs:
+            kwargs["layers_control"] = True
+
+        if "fullscreen" not in kwargs:
+            kwargs["layers_control"]=True
+
+        self.add_draw_control()
+        self.add_search_control()
+        self.add_layers_control()
+
 
         
 
@@ -74,7 +84,36 @@ class Map(ipyleaflet.Map):
 
         self.add_control(draw_control)
 
-    
+    def add_layers_control(self, position='topright'):
+        """Adds a layers control to the map.
+        Args:
+            kwargs: Keyword arguments to pass to the layers control.
+        """
+        layers_control = ipyleaflet.LayersControl(position=position)
+        self.add_control(layers_control)
+
+    def add_fullscreen_control(self, position="bottomright"):
+        """Adds a fullscreen control to the map.
+        Args:
+            kwargs: Keyword arguments to pass to the fullscreen control.
+        """
+        fullscreen_control = ipyleaflet.FullScreenControl(position=position)
+        self.add_control(fullscreen_control)
+
+    def add_tile_layer(self, url, name="Google_maps", attribution="", **kwargs):
+        """Adds a tile layer to the map.
+        Args:
+            url (str): The URL of the tile layer.
+            name (str): The name of the tile layer.
+            attribution (str, optional): The attribution of the tile layer. Defaults to "".
+        """
+        tile_layer = ipyleaflet.TileLayer(
+            url=url,
+            name=name,
+            attribution=attribution,
+            **kwargs
+        )
+        self.add_layer(tile_layer)
 
     
 
