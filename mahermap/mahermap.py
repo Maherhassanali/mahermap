@@ -2,6 +2,7 @@
 import random
 import string
 import ipyleaflet
+import geopandas
 
 
 
@@ -114,6 +115,50 @@ class Map(ipyleaflet.Map):
             **kwargs
         )
         self.add_layer(tile_layer)
+    def add_basemap(self, basemap="satellite", **kwargs):
+
+        import xyzservices.providers as xyz
+
+        if basemap.lower() == "roadmap":
+            url = 'http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}'
+            self.add_tile_layer(url, name=basemap, **kwargs)
+        elif basemap.lower() == "satellite":
+            url = 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}'
+            self.add_tile_layer(url, name=basemap, **kwargs)
+        else:
+            try:
+                basemap = eval(f"xyz.{basemap}")
+                url = basemap.build_url()
+                attribution = basemap.attribution
+                self.add_tile_layer(url, name=basemap.name, attribution=attribution, **kwargs)
+            except:
+                raise ValueError(f"Basemap '{basemap}' not found.")
+            
+    def add_geojson(self, data, name='GeoJSON', **kwargs):
+        """Adds a GeoJSON layer to the map.
+        Args:
+            data (dict): The GeoJSON data.
+        """
+
+        if isinstance(data, str):
+            import json
+            with open(data, "r") as f:
+                data = json.load(f)
+
+        geojson = ipyleaflet.GeoJSON(data=data,name=name, **kwargs)
+        self.add_layer(geojson)
+
+    def add_shp(self, data, name='Shapefile', **kwargs):
+        """Adds a Shapefile layer to the map.
+        Args:
+            data (str): The path to the Shapefile.
+        """
+        import geopandas as gpd
+        gdf = gpd.read_file(data)
+        geojson = gdf.__geo_interface__
+        self.add_geojson(geojson, name=name, **kwargs)
+
+
 
     
 
